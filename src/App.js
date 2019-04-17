@@ -1,30 +1,32 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
-import {getInitialData} from  './util/api'
-class App extends Component {
+import { connect } from 'react-redux'
+import {initHandler} from  './actions'
+import LoadingBar from 'react-redux-loading-bar'
+import Header from './components/header'
+import Body from './components/body'
 
+class App extends Component {
+  componentDidMount(){
+    this.props.dispatch(initHandler())
+  }
   render() {
-      getInitialData().then(data => console.log(data))
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <LoadingBar />
+        <Header/>
+        <Body />
       </div>
     );
   }
 }
 
-export default App;
+function mapStateToProps (items, summary) {
+
+  return {
+    loading: items === null,
+    summary,
+    items
+
+  }
+}
+export default connect(mapStateToProps)(App)

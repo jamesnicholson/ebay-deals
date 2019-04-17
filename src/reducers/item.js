@@ -1,6 +1,6 @@
-import {GET_ITEMS} from '../actions/items'
+import {GET_ITEMS, GET_SUMMARY} from '../actions/items'
 
-export default function items(state={}, action){
+export default function ebayfeed(state={}, action){
     switch(action.type){
         case GET_ITEMS:{
             return{
@@ -8,6 +8,12 @@ export default function items(state={}, action){
                 ...action.items
             }
         }
+         case GET_SUMMARY:{
+                return{
+                    ...state,
+                    ...action.summary
+                }
+            }
         default: return state
     }
 

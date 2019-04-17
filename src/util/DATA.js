@@ -2,16 +2,24 @@ export function init() {
     return fetch("https://www.ebay.com/rps/feed/v1.1/epnexcluded/EBAY-US?limit=200")
         .then(response => response.text())
         .then(str => (new window.DOMParser()).parseFromString(str, "text/xml"))
-        .then(data => {
-			console.log(data)
-			return formatQuestion(xmlToJson(data))
-		})//
+        .then(data => formatQuestion(xmlToJson(data)))
+}
+function formatQuestion(data){
+	return{
+        items:data.eBayDealsAndEventsItems.item,
+        summary:data.eBayDealsAndEventsItems.summary
+    } 
 }
 
-function formatQuestion(data){
-	console.log(data)
-//	console.log(data.eBayDealsAndEventsItems.item)
-}
+
+
+
+
+
+
+
+
+
 /**
  * Originally from http://davidwalsh.name/convert-xml-json
  * This is a version that provides a JSON object without the attributes and places textNodes as values
@@ -23,15 +31,12 @@ function formatQuestion(data){
  * @return {*}
  */
 function xmlToJson(xml) {
-
     // Create the return object
     var obj = {};
-
     // text node
     if (4 === xml.nodeType) {
         obj = xml.nodeValue;
     }
-
     if (xml.hasChildNodes()) {
         for (var i = 0; i < xml.childNodes.length; i++) {
             var TEXT_NODE_TYPE_NAME = '#text',
@@ -59,7 +64,6 @@ function xmlToJson(xml) {
                         obj[nodeName] = [];
                         obj[nodeName].push(old);
                     }
-
                     obj[nodeName].push(xmlToJson(item));
                 }
             }

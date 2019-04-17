@@ -1,7 +1,7 @@
 import {init} from './DATA'
 export function getInitialData () {
     return Promise.all([
-        init(),
+      init(),
     ]).then(([items]) => ({
       items
     }))
