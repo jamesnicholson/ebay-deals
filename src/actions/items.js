@@ -4,6 +4,8 @@ export function getItems(items){
     return{
         type:GET_ITEMS,
         items
+        
+
     }
 }
 export function getSummary(summary){

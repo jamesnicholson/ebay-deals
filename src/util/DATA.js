@@ -5,10 +5,23 @@ export function init() {
         .then(data => formatQuestion(xmlToJson(data)))
 }
 function formatQuestion(data){
+
 	return{
-        items:data.eBayDealsAndEventsItems.item,
+        items:reducedItems(data.eBayDealsAndEventsItems.item),
         summary:data.eBayDealsAndEventsItems.summary
     } 
+}
+
+function reducedItems(items){
+    let reducedAmount = 3
+    const filteredItems = items.reduce(function(acc, cur, i) {
+        if(i < reducedAmount){
+            acc[i] = cur;
+        }
+        return acc;
+      }, {})
+
+    return filteredItems;
 }
 
 
@@ -18,9 +31,10 @@ function formatQuestion(data){
 
 
 
-
-
 /**
+ * {decks.length === 0 ? null: Object.keys(decks).map((deck, index)=>{ 
+    return this.createDecks(decks[deck], index)
+  })}
  * Originally from http://davidwalsh.name/convert-xml-json
  * This is a version that provides a JSON object without the attributes and places textNodes as values
  * rather than an object with the textNode in it.

@@ -11,17 +11,18 @@ import styled from 'styled-components'
 
 const StyledCard = styled(Card)`
     max-width:345px;   
+    flex-direction: row;
 `
 const StyledCardMedia = styled(CardMedia)`
     height:200px;   
 `
 class Cards extends Component{          
-    cards(items){
-
+    card(item, index){
         const classes = this.props
         return(
-        items.map((item) => (
-          <StyledCard key={item.itemId} className={classes.card}>
+    
+            <StyledCard  key={index} className={classes.card}>
+            {console.log(item)}
             <CardActionArea>
               <StyledCardMedia
                 className={classes.media}
@@ -34,11 +35,7 @@ class Cards extends Component{
                 </Typography>
                 <Typography component="p">
                  {item.price}{item.currency}
-
-            
-
-
-
+                
                 </Typography>
               </CardContent>
             </CardActionArea>
@@ -51,14 +48,19 @@ class Cards extends Component{
               </Button>
             </CardActions>
           </StyledCard>
-        )))
+
+          )
     }
     render(){
-        console.log(this)
+     
         const {loading, items } = this.props
         return(
             <div>
-                {loading === false ? this.cards(items) : null}
+                {loading === false ?
+                  Object.keys(items).map((index)=>{ 
+                    return this.card(items[index], index) 
+                  })
+                  : null}
             </div>
         )
     }
