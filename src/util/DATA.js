@@ -13,7 +13,7 @@ function formatQuestion(data){
 }
 
 function reducedItems(items){
-    let reducedAmount = 3
+    let reducedAmount = 20
     const filteredItems = items.reduce(function(acc, cur, i) {
         if(i < reducedAmount){
             acc[i] = cur;
