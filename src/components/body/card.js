@@ -9,24 +9,24 @@ import Typography from '@material-ui/core/Typography';
 import CardMedia from '@material-ui/core/CardMedia';
 
 export function Card({item} ){
-    console.log(item)
     return  <Grid item xs>
             <MUICard className={item.card}>
                 {console.log(item)}
                 <CardActionArea>
                     <CardMedia
-                     component="img"
-                        src={item.image225}
-                        
-                        title="Contemplative Reptile"
+                        component="img"
+                        src={"http://thumbs3.ebaystatic.com/d/l1600/pict/"+item.itemId+".jpg"}
+                        title={item.title}
                     />
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="h2">
                     {item.title}
                     </Typography>
-                    <Typography component="p">
-                    {item.price}{item.currency}
-                    
+                    <Typography 
+                        component="p"
+                        fontSize={{ xs: 'h6.fontSize', sm: 'h4.fontSize', md: 'h3.fontSize' }
+                        }>
+                        {item.price}{item.currency}
                     </Typography>
                 </CardContent>
             </CardActionArea>
@@ -58,5 +58,5 @@ export function Card({item} ){
   shippingCost(pin):"0.00"
   dealUrl(pin):"https://www.ebay.com/deals/6036208965"
 
-
+http://thumbs3.ebaystatic.com/d/l1600/pict/
 */

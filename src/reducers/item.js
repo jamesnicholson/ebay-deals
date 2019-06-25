@@ -5,7 +5,7 @@ export default function ebayfeed(state={}, action){
         case GET_ITEMS:{
             return{
                 ...state,
-                ...action.items
+               ...action.items
             }
         }
          case GET_SUMMARY:{
